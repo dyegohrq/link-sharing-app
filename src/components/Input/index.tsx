@@ -27,7 +27,6 @@ export default function Input({
   requiredMessage,
   pattern,
 }: InputProps) {
-  const [value, setValue] = useState("");
   return (
     <div className=" w-full flex flex-col gap-2 relative">
       <label
@@ -41,21 +40,16 @@ export default function Input({
         type="text"
         placeholder={placeholder}
         id="email"
-        className=" border border-grey-200 rounded-lg py-5 px-4 placeholder:pl-10 outline-none peer"
-        style={{borderColor: error && '#ff3939'}}
+        className=" border border-grey-200 rounded-lg py-5 px-13 outline-none peer"
+        style={{ borderColor: error && "#ff3939" }}
         {...register(id, {
           required: requiredMessage,
           pattern: pattern,
         })}
-        onChange={(e) => setValue(e.target.value)}
-        value={value}
       />
-      {value === "" && (
-        <span className="absolute top-15 left-6 text-grey-500 pointer-events-none peer-focus:hidden ">
-          {icon}
-        </span>
-      )}
-
+      <span className="absolute top-[58px] left-6 text-grey-500">
+        {icon}
+      </span>
       {error && (
         <span className="w-full flex justify-end text-red-500 text-present-4 sm:absolute top-[57px] right-8 ">
           {" "}

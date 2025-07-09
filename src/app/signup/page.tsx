@@ -1,22 +1,16 @@
 "use client";
 
-import Image from "next/image";
-import LogoImg from "../../../public/assets/images/logo-devlinks-large.svg";
-import Input from "@/components/Input";
 import ContainerLogin from "@/components/containerLogin";
-import Link from "next/link";
+import LogoImg from "../../../public/assets/images/logo-devlinks-large.svg";
+import Image from "next/image";
+import { useForm } from "react-hook-form";
+import { CheckoutFormData } from "../login/page";
+import Input from "@/components/Input";
 import { AiTwotoneMail } from "react-icons/ai";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { useForm } from "react-hook-form";
+import Link from "next/link";
 
-export type CheckoutFormData = {
-  email: string;
-  password: string;
-  createPassword: string;
-  confirmPassword: string;
-};
-
-export default function Login() {
+export default function Signup() {
   const {
     register,
     handleSubmit,
@@ -24,17 +18,17 @@ export default function Login() {
   } = useForm<CheckoutFormData>();
 
   function onSubmit() {
-    alert("Ok");
+    alert("ok");
   }
 
   return (
     <ContainerLogin>
       <Image src={LogoImg} alt="Logo DevLinks" className="mb-[70px]" />
-      <div className="w-full sm:bg-white rounded-[12px] p-10 " >
+      <div className="w-full sm:bg-white rounded-[12px] p-10">
         <div className="mb-10">
-          <h1 className="text-present-2 text-grey-900 mb-2">Login</h1>
+          <h1 className="text-present-2 text-grey-900 mb-2">Create account</h1>
           <p className="text-present-3-regular text-grey-500 ">
-            Add your details below to get back into the app
+            Let's get you started sharing your links!
           </p>
         </div>
         <form
@@ -58,11 +52,11 @@ export default function Login() {
           </div>
           <div>
             <Input
-              placeholder="Enter your password"
-              label="Password"
+              placeholder="At least 8 characters"
+              label="Create password"
               icon={<RiLockPasswordFill />}
-              id="password"
-              error={errors.password?.message}
+              id="createPassword"
+              error={errors.createPassword?.message}
               register={register}
               requiredMessage="Please check again"
               pattern={{
@@ -71,11 +65,27 @@ export default function Login() {
               }}
             />
           </div>
-          <button type="submit" className=" bg-purple-600 w-full py-4 px-6 text-present-3-semibold text-white rounded-lg cursor-pointer ">Login</button>
+          <div>
+            <Input
+              placeholder="At least 8 characters"
+              label="Confirm password"
+              icon={<RiLockPasswordFill />}
+              id="confirmPassword"
+              error={errors.confirmPassword?.message}
+              register={register}
+              requiredMessage="Please check again"
+              pattern={{
+                value: /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).{8,}$/,
+                message: "Wrong Format",
+              }}
+            />
+            <p className="text-present-4 mt-2 text-grey-500 " >Password must contain at least 8 characters</p>
+          </div>
+          <button type="submit" className=" bg-purple-600 w-full py-4 px-6 text-present-3-semibold text-white rounded-lg cursor-pointer ">Create new account</button>
         </form>
         <div className=" flex flex-col w-full items-center sm:flex-row justify-center gap-2 text-present-3-regular " >
-          <p className="text-grey-500  " >Don't have an account?</p>
-          <Link href={"/signup"} className="text-purple-600" >Create account</Link>
+          <p className="text-grey-500  " >Already have an account?</p>
+          <Link href={"/login"} className="text-purple-600" >Login</Link>
         </div>
       </div>
     </ContainerLogin>
