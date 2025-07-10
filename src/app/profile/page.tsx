@@ -1,6 +1,8 @@
+import Container from "@/components/container";
+
 export default function Profile() {
     return(
-        <div>
+        <Container>
             Links
   Profile Details
 
@@ -23,6 +25,6 @@ export default function Profile() {
   e.g. email@example.com
 
   Save
-        </div>
+        </Container>
     )
 }
